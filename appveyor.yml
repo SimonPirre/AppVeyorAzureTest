@@ -27,7 +27,7 @@ artifacts:
 deploy:
   - provider: WebDeploy
     name: Production
-    server: $(azure_server)
+    server: https://$(azure_website).scm.azurewebsites.net:443/msdeploy.axd?site=$(azure_website)
     website: $(azure_website)
     username: $(azure_username)
     password:
