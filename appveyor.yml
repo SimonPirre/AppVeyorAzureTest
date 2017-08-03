@@ -4,10 +4,6 @@ image: Visual Studio 2017
 configuration: Release
 platform: Any CPU
 
-build:
-  verbosity: minimal
-  project: AppVeyorAzureTest.sln
-  
 environment:
   DOTNET_CLI_TELEMETRY_OPTOUT: 1
   webapp1_folder: .\AppVeyorAzureTest
@@ -16,4 +12,15 @@ environment:
 
 
 before_build:
-  - cmd: before_build.cmd
+  - cmd: before_build.cmd %webapp1_folder% %APPVEYOR_BUILD_FOLDER%
+  
+build:
+  verbosity: minimal
+  project: AppVeyorAzureTest.sln
+
+after_build:
+  - ps: .\package.ps1 -projectPath $env:webapp1_proj -packageName $env:webapp1_package -absoluteRepoDirectory $env:APPVEYOR_BUILD_FOLDER
+
+artifacts:
+- path: '**\*.nupkg'
+- path: '**\$(webapp1_package).*'
