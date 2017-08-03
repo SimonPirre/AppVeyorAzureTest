@@ -27,8 +27,8 @@ artifacts:
 deploy:
   - provider: WebDeploy
     name: Production
-    server: $(webapp1_package)
-    website: $(webapp1_package)
+    server: $(azure_server)
+    website: $(azure_website)
     username: $(azure_username)
     password:
       secure: $(azure_password)
