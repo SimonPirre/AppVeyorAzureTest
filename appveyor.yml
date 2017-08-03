@@ -13,3 +13,7 @@ environment:
   webapp1_folder: .\AppVeyorAzureTest
   webapp1_proj: $(webapp1_folder)\AppVeyorAzureTest.csproj
   webapp1_package: AppVeyorAzureTest.$(APPVEYOR_BUILD_VERSION)-$(APPVEYOR_REPO_BRANCH)
+
+
+before_build:
+  - cmd: before_build.cmd
