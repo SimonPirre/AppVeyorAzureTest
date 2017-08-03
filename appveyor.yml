@@ -22,5 +22,21 @@ after_build:
   - ps: .\package.ps1 -projectPath $env:webapp1_proj -packageName $env:webapp1_package -absoluteRepoDirectory $env:APPVEYOR_BUILD_FOLDER
 
 artifacts:
-- path: '**\*.nupkg'
-- path: '**\$(webapp1_package).*'
+- path: '**\$(webapp1_package).zip'
+
+deploy:
+  - provider: WebDeploy
+    name: Production
+    server: $(azure_server)
+    website: $(azure_website)
+    username: $(azure_username)
+    password:
+      secure: $(azure_password)
+    artifact: $(webapp1_package).zip
+    aspnet_core: true
+    aspnet_core_force_restart: true
+    app_offline: true
+    remove_files: true
+    do_not_use_checksum: true
+    on:
+      branch: master
