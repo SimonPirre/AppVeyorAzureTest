@@ -5,7 +5,6 @@ configuration: Release
 platform: Any CPU
 
 environment:
-  DOTNET_CLI_TELEMETRY_OPTOUT: 1
   webapp1_folder: .\AppVeyorAzureTest
   webapp1_proj: $(webapp1_folder)\AppVeyorAzureTest.csproj
   webapp1_package: AppVeyorAzureTest.$(APPVEYOR_BUILD_VERSION)-$(APPVEYOR_REPO_BRANCH)
@@ -30,8 +29,7 @@ deploy:
     server: https://$(azure_website).scm.azurewebsites.net:443/msdeploy.axd?site=$(azure_website)
     website: $(azure_website)
     username: $(azure_username)
-    password:
-      secure: $(azure_password)
+    password: $(azure_password)
     artifact: $(webapp1_package).zip
     aspnet_core: true
     aspnet_core_force_restart: true
