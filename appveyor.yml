@@ -30,7 +30,8 @@ deploy:
     server: https://$(azure_website).scm.azurewebsites.net:443/msdeploy.axd?site=$(azure_website)
     website: $(azure_website)
     username: $(azure_username)
-    password: $(azure_password)
+    password:
+      secure: $(azure_password)
     artifact: $(webapp1_package).zip
     aspnet_core: true
     aspnet_core_force_restart: true
