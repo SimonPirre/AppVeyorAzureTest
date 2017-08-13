@@ -5,14 +5,14 @@ configuration: Release
 platform: Any CPU
 
 environment:
-  DOTNET_CLI_TELEMETRY_OPTOUT: 1
   webapp1_folder: .\AppVeyorAzureTest
   webapp1_proj: $(webapp1_folder)\AppVeyorAzureTest.csproj
   webapp1_package: AppVeyorAzureTest.$(APPVEYOR_BUILD_VERSION)-$(APPVEYOR_REPO_BRANCH)
+  test_proj: .\XUnitSample.Test\XUnitSample.Test.csproj
 
 
 before_build:
-  - cmd: before_build.cmd %webapp1_folder% %APPVEYOR_BUILD_FOLDER%
+  - ps: before_build.ps1
   
 build:
   verbosity: minimal
@@ -24,10 +24,11 @@ after_build:
 artifacts:
 - path: '**\$(webapp1_package).zip'
 
+# automatic test detection not supported in dotnet core xUnit
+# turn it off and run custom test script instead
 test: off
-#test:
-#  assemblies:
-#    - '**\*.Test.dll'
+test_script:
+  - ps: test_script.ps1 $env:test_proj
 
 deploy:
   - provider: WebDeploy
