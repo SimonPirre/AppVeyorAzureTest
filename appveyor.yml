@@ -24,6 +24,7 @@ after_build:
 artifacts:
 - path: '**\$(webapp1_package).zip'
 
+test: off
 #test:
 #  assemblies:
 #    - '**\*.Test.dll'
