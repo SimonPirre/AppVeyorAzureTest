@@ -24,9 +24,9 @@ after_build:
 artifacts:
 - path: '**\$(webapp1_package).zip'
 
-test:
-  assemblies:
-    - '**\*.Test.dll'
+#test:
+#  assemblies:
+#    - '**\*.Test.dll'
 
 deploy:
   - provider: WebDeploy
