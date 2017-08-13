@@ -12,7 +12,7 @@ environment:
 
 
 before_build:
-  - ps: before_build.ps1
+  - ps: .\before_build.ps1
   
 build:
   verbosity: minimal
@@ -28,7 +28,7 @@ artifacts:
 # turn it off and run custom test script instead
 test: off
 test_script:
-  - ps: test_script.ps1 $env:test_proj
+  - ps: .\test_script.ps1 $env:test_proj
 
 deploy:
   - provider: WebDeploy
