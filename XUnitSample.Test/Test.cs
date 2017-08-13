@@ -8,7 +8,7 @@ namespace XUnitSample.Test
         [Fact]
         public void Test1()
         {
-            Assert.Equal("Test", "Test");
+            Assert.Equal("Test", "Test.");
         }
     }
 }
